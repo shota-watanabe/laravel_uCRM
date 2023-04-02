@@ -14,6 +14,12 @@ class InertiaTestController extends Controller
         return Inertia::render('Inertia/index');
     }
 
+    // createメソッドは、indexメソッドの次に書くことが多い
+    public function create()
+    {
+      return Inertia::render('Inertia/Create');
+    }
+
     public function show($id)
     {
         return Inertia::render('Inertia/Show', [
@@ -24,12 +30,12 @@ class InertiaTestController extends Controller
     // 入力内容を$requestで受け取ることができる
     public function store(Request $request)
     {
-      // useで読み込んだモデルをインスタンス化
-      $InertiaTest = new InertiaTest;
-      $InertiaTest->title = $request->title;
-      $InertiaTest->content = $request->content;
-      $InertiaTest->save();
-      // to_route...laravel９から追加されたメソッド
-      return to_route('inertia.index');
+        // useで読み込んだモデルをインスタンス化
+        $InertiaTest = new InertiaTest();
+        $InertiaTest->title = $request->title;
+        $InertiaTest->content = $request->content;
+        $InertiaTest->save();
+        // to_route...laravel９から追加されたメソッド
+        return to_route('inertia.index');
     }
 }
